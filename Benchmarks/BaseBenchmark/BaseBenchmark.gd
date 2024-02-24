@@ -1,6 +1,6 @@
 extends Node2D
 
-var ignore_chars_drawn: int = 13
+var ignore_chars_drawn: int = 18
 
 @export_category("Benchmark")
 @export var spawn_interval: float = 1
@@ -17,6 +17,7 @@ var last_chars_drawn: int
 var attempts: int
 var time: float
 var debug_position: Vector2 = Vector2(16, 16 + font_size)
+var duration: float
 
 func _ready():
 	if !font: font = ThemeDB.fallback_font
@@ -28,12 +29,14 @@ func _ready():
 func _process(delta: float):
 	RenderingServer.canvas_item_clear(context)
 	
+	duration += delta
 	var fps: int = round(Engine.get_frames_per_second())
 	var drawn_objs: int = (Performance.get_monitor(Performance.RENDER_TOTAL_OBJECTS_IN_FRAME) as int) - last_chars_drawn
 	var draw_calls: int = (Performance.get_monitor(Performance.RENDER_TOTAL_DRAW_CALLS_IN_FRAME) as int) - last_chars_drawn
 	
-	var text: String = "%s\n(PRESS TO GO BACK)\n\nFRAMES/SEC: %s\nDRAWN OBJS: %s\nDRAW CALLS: %s" % [
+	var text: String = "%s\n(PRESS TO GO BACK)\n\nDURATION:   %.2f SECS\nFRAMES/SEC: %s\nDRAWN OBJS: %s\nDRAW CALLS: %s" % [
 		name.to_upper(),
+		duration,
 		fps,
 		drawn_objs,
 		draw_calls
@@ -44,7 +47,7 @@ func _process(delta: float):
 	if fps < fps_target:
 		attempts += 1
 		if attempts >= fps:
-			finish()
+			finish(duration, fps, drawn_objs, draw_calls)
 			return
 	
 	time += delta
@@ -65,7 +68,7 @@ func get_ignore_name_chars_drawn():
 	regex.compile("\\s")
 	return regex.search_all(name).size()
 
-func finish():
+func finish(duration: float, fps: int, drawn_objs: int, draw_calls: int):
 	get_tree().paused = true
 	set_process(false)
 	
@@ -74,3 +77,11 @@ func finish():
 	done_position.y += round(font_size)
 	
 	font.draw_multiline_string(context, done_position, "DONE", HORIZONTAL_ALIGNMENT_CENTER, 200, font_size*2)
+	print("\n[BENCHMARK: %s]\nDATE:       %s\nDURATION:   %.2f SECS\nFRAMES/SEC: %s\nDRAWN OBJS: %s\nDRAW CALLS: %s" % [
+		name.to_upper(),
+		Time.get_datetime_string_from_datetime_dict(Time.get_datetime_dict_from_system(), true),
+		duration,
+		fps,
+		drawn_objs,
+		draw_calls
+	])
