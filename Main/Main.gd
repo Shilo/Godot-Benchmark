@@ -2,6 +2,9 @@ extends Control
 
 @export var quit_button: Button
 
+func _enter_tree():
+	get_tree().paused = false
+
 func _ready():
 	if quit_button:
 		quit_button.pressed.connect(get_tree().quit)
