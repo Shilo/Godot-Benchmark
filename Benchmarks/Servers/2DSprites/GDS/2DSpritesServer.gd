@@ -14,8 +14,8 @@ func spawn():
 	var viewport_size: Vector2 = get_viewport().size
 	var size := sprite_texture.get_size()
 	
-	var position: Vector2 = Vector2()
-	position.x = randf_range(0, viewport_size.x - size.x)
-	position.y = randf_range(0, viewport_size.y - size.y)
+	var texture_position: Vector2 = Vector2()
+	texture_position.x = randf_range(0, viewport_size.x - size.x)
+	texture_position.y = randf_range(0, viewport_size.y - size.y)
 	
-	RenderingServer.canvas_item_add_texture_rect(context, Rect2(position, size), sprite_texture)
+	RenderingServer.canvas_item_add_texture_rect(context, Rect2(texture_position, size), sprite_texture)

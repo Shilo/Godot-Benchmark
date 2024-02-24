@@ -80,7 +80,7 @@ func finish(fps: int, drawn_objs: int, draw_calls: int):
 	
 	var done_width: int = 90
 	var done_position: Vector2 = get_viewport().size / 2
-	done_position.x -= done_width/2
+	done_position.x -= done_width/2.0
 	done_position.y += round(font_size)
 	
 	RenderingServer.canvas_item_add_rect(context, Rect2(done_position.x, done_position.y - font_size*2, done_width, font_size*2 + 10), Color(0, 0, 0, 0.5))
