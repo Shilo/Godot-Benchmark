@@ -12,13 +12,12 @@ config_version=5
 
 config/name="Benchmark"
 config/description="Various tests to analyze performance."
-run/main_scene="res://BaseBenchmark/BaseBenchmark.tscn"
+run/main_scene="res://Main/Main.tscn"
 config/features=PackedStringArray("4.3", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
 [display]
 
-window/size/mode=4
 window/vsync/vsync_mode=0
 
 [dotnet]
