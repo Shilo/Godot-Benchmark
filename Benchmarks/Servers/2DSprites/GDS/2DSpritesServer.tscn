@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://m31svf832b7m"]
+
+[ext_resource type="PackedScene" uid="uid://tsa7uoj0paal" path="res://Benchmarks/BaseBenchmark/BaseBenchmark.tscn" id="1_ntgmk"]
+[ext_resource type="Script" path="res://Benchmarks/Servers/2DSprites/GDS/2DSpritesServer.gd" id="2_r4ew2"]
+
+[node name="2D Sprites - RenderingServer" instance=ExtResource("1_ntgmk")]
+script = ExtResource("2_r4ew2")

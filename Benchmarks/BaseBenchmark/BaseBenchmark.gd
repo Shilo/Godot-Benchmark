@@ -3,7 +3,7 @@ extends Node2D
 var ignore_chars_drawn: int = 18
 
 @export_category("Benchmark")
-@export var spawn_interval: float = 1/30
+@export var spawn_interval: float = 1/30.0
 @export var spawn_amount: int = 100
 @export var fps_target: int = 30
 
@@ -19,6 +19,8 @@ var attempts: int
 var time: float
 var debug_position: Vector2 = Vector2(16, 16 + font_size)
 var duration: float
+
+@onready var scene_name := get_parent().name
 
 func _ready():
 	if !font: font = ThemeDB.fallback_font
@@ -36,14 +38,14 @@ func _process(delta: float):
 	var draw_calls: int = (Performance.get_monitor(Performance.RENDER_TOTAL_DRAW_CALLS_IN_FRAME) as int) - last_chars_drawn
 	
 	var text: String = "%s\n(PRESS TO GO BACK)\n\nDURATION:   %.2f SECS\nFRAMES/SEC: %s\nDRAWN OBJS: %s\nDRAW CALLS: %s" % [
-		name.to_upper(),
+		scene_name.to_upper(),
 		duration,
 		fps,
 		drawn_objs,
 		draw_calls
 	]
 	
-	RenderingServer.canvas_item_add_rect(context, Rect2(0, 0, 250, 180), Color(0, 0, 0, 0.5))
+	RenderingServer.canvas_item_add_rect(context, Rect2(0, 0, 300, 180), Color(0, 0, 0, 0.5))
 	font.draw_multiline_string(context, debug_position, text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size)
 	
 	if fps < fps_target:
@@ -70,7 +72,7 @@ func _input(event: InputEvent):
 func get_ignore_name_chars_drawn():
 	var regex := RegEx.new()
 	regex.compile("\\s")
-	return regex.search_all(name).size()
+	return regex.search_all(scene_name).size()
 
 func finish(fps: int, drawn_objs: int, draw_calls: int):
 	get_tree().paused = true
@@ -85,7 +87,7 @@ func finish(fps: int, drawn_objs: int, draw_calls: int):
 	font.draw_multiline_string(context, done_position, "DONE", HORIZONTAL_ALIGNMENT_CENTER, done_width, font_size*2)
 	
 	print("\n[BENCHMARK: %s]\nDATE:       %s\nDURATION:   %.2f SECS\nFRAMES/SEC: %s\nDRAWN OBJS: %s\nDRAW CALLS: %s" % [
-		name.to_upper(),
+		scene_name.to_upper(),
 		Time.get_datetime_string_from_datetime_dict(Time.get_datetime_dict_from_system(), true),
 		duration,
 		fps,
