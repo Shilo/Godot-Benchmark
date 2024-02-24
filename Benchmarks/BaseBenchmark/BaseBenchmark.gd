@@ -3,7 +3,7 @@ extends Node2D
 var ignore_chars_drawn: int = 18
 
 @export_category("Benchmark")
-@export var spawn_interval: float = 1
+@export var spawn_interval: float = 0.1
 @export var fps_target: int = 30
 
 @export_category("Interface")
@@ -47,7 +47,7 @@ func _process(delta: float):
 	if fps < fps_target:
 		attempts += 1
 		if attempts >= fps:
-			finish(duration, fps, drawn_objs, draw_calls)
+			finish(fps, drawn_objs, draw_calls)
 			return
 	
 	time += delta
@@ -68,7 +68,7 @@ func get_ignore_name_chars_drawn():
 	regex.compile("\\s")
 	return regex.search_all(name).size()
 
-func finish(duration: float, fps: int, drawn_objs: int, draw_calls: int):
+func finish(fps: int, drawn_objs: int, draw_calls: int):
 	get_tree().paused = true
 	set_process(false)
 	
@@ -77,6 +77,7 @@ func finish(duration: float, fps: int, drawn_objs: int, draw_calls: int):
 	done_position.y += round(font_size)
 	
 	font.draw_multiline_string(context, done_position, "DONE", HORIZONTAL_ALIGNMENT_CENTER, 200, font_size*2)
+	
 	print("\n[BENCHMARK: %s]\nDATE:       %s\nDURATION:   %.2f SECS\nFRAMES/SEC: %s\nDRAWN OBJS: %s\nDRAW CALLS: %s" % [
 		name.to_upper(),
 		Time.get_datetime_string_from_datetime_dict(Time.get_datetime_dict_from_system(), true),

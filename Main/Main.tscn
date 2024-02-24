@@ -46,11 +46,6 @@ theme_override_font_sizes/font_size = 24
 text = "Godot Benchmark"
 horizontal_alignment = 1
 
-[node name="BaseBenchmark_BaseBenchmark" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Base Benchmark"
-
 [node name="GridContainer" type="GridContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/h_separation = 16
@@ -61,12 +56,12 @@ columns = 3
 layout_mode = 2
 text = "2D Sprites - Nodes"
 
-[node name="Nodes_2DSprites_GDS_2DSprites" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
+[node name="Nodes_2DSprites_GDS_2DSpritesNodes" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "GDS"
 
-[node name="Nodes_2DSprites_C#_2DSprites" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
+[node name="Nodes_2DSprites_C#_2DSpritesNodes" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "C#"
@@ -75,12 +70,12 @@ text = "C#"
 layout_mode = 2
 text = "2D Physics - Nodes"
 
-[node name="Nodes_2DPhysics_GDS_2DPhysics" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
+[node name="Nodes_2DPhysics_GDS_2DPhysicsNodes" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "GDS"
 
-[node name="Nodes_2DPhysics_C#_2DPhysics" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
+[node name="Nodes_2DPhysics_C#_2DPhysicsNodes" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "C#"
@@ -89,12 +84,12 @@ text = "C#"
 layout_mode = 2
 text = "2D Sprites - RenderingServer"
 
-[node name="Servers_2DSprites_GDS_2DSprites2" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
+[node name="Servers_2DSprites_GDS_2DSpritesServer" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "GDS"
 
-[node name="Servers_2DSprites_C#_2DSprites2" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
+[node name="Servers_2DSprites_C#_2DSpritesServer" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "C#"
@@ -103,12 +98,12 @@ text = "C#"
 layout_mode = 2
 text = "2D Physics - PhysicsServer "
 
-[node name="Servers_2DPhysics_GDS_2DPhysics2" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
+[node name="Servers_2DPhysics_GDS_2DPhysicsServer" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "GDS"
 
-[node name="Servers_2DPhysics_C#_2DPhysics2" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
+[node name="Servers_2DPhysics_C#_2DPhysicsServer" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "C#"
