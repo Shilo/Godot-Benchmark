@@ -1,6 +1,6 @@
 extends Node2D
 
-var ignore_chars_drawn: int = 18
+var ignore_chars_drawn: int = 18 - 1 # minus one for background
 
 @export_category("Benchmark")
 @export var spawn_interval: float = 1/30.0
