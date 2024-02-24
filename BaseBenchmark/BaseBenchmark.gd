@@ -1,6 +1,6 @@
 extends Node2D
 
-const ignore_chars_drawn: int = 13
+var ignore_chars_drawn: int = 13
 
 @export_category("Benchmark")
 @export var spawn_interval: float = 1
@@ -21,6 +21,7 @@ var debug_position: Vector2 = Vector2(16, 16 + font_size)
 func _ready():
 	if !font: font = ThemeDB.fallback_font
 	context = RenderingServer.canvas_item_create()
+	ignore_chars_drawn += get_ignore_name_chars_drawn()
 	
 	RenderingServer.canvas_item_set_parent(context, get_canvas_item())
 
@@ -58,6 +59,11 @@ func _input(event: InputEvent):
 		&& !event.is_action_pressed("ui_cancel")): return
 	
 	get_tree().change_scene_to_file("res://Main/Main.tscn")
+
+func get_ignore_name_chars_drawn():
+	var regex := RegEx.new()
+	regex.compile("\\s")
+	return regex.search_all(name).size()
 
 func finish():
 	get_tree().paused = true
