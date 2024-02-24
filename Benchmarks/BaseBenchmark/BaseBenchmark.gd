@@ -3,7 +3,8 @@ extends Node2D
 var ignore_chars_drawn: int = 18
 
 @export_category("Benchmark")
-@export var spawn_interval: float = 0.1
+@export var spawn_interval: float = 1/30
+@export var spawn_amount: int = 100
 @export var fps_target: int = 30
 
 @export_category("Interface")
@@ -42,6 +43,7 @@ func _process(delta: float):
 		draw_calls
 	]
 	
+	RenderingServer.canvas_item_add_rect(context, Rect2(0, 0, 250, 180), Color(0, 0, 0, 0.5))
 	font.draw_multiline_string(context, debug_position, text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size)
 	
 	if fps < fps_target:
@@ -53,7 +55,9 @@ func _process(delta: float):
 	time += delta
 	if time >= spawn_interval:
 		time -= spawn_interval
-		spawn.emit()
+		
+		for i in spawn_amount:
+			spawn.emit()
 	
 	last_chars_drawn = text.length() - ignore_chars_drawn
 
@@ -72,11 +76,13 @@ func finish(fps: int, drawn_objs: int, draw_calls: int):
 	get_tree().paused = true
 	set_process(false)
 	
+	var done_width: int = 90
 	var done_position: Vector2 = get_viewport().size / 2
-	done_position.x -= 100
+	done_position.x -= done_width/2
 	done_position.y += round(font_size)
 	
-	font.draw_multiline_string(context, done_position, "DONE", HORIZONTAL_ALIGNMENT_CENTER, 200, font_size*2)
+	RenderingServer.canvas_item_add_rect(context, Rect2(done_position.x, done_position.y - font_size*2, done_width, font_size*2 + 10), Color(0, 0, 0, 0.5))
+	font.draw_multiline_string(context, done_position, "DONE", HORIZONTAL_ALIGNMENT_CENTER, done_width, font_size*2)
 	
 	print("\n[BENCHMARK: %s]\nDATE:       %s\nDURATION:   %.2f SECS\nFRAMES/SEC: %s\nDRAWN OBJS: %s\nDRAW CALLS: %s" % [
 		name.to_upper(),
