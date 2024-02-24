@@ -28,7 +28,7 @@ func _ready():
 func _process(delta: float):
 	RenderingServer.canvas_item_clear(context)
 	
-	var fps: int = Engine.get_frames_per_second()
+	var fps: int = round(Engine.get_frames_per_second())
 	var drawn_objs: int = (Performance.get_monitor(Performance.RENDER_TOTAL_OBJECTS_IN_FRAME) as int) - last_chars_drawn
 	var draw_calls: int = (Performance.get_monitor(Performance.RENDER_TOTAL_DRAW_CALLS_IN_FRAME) as int) - last_chars_drawn
 	

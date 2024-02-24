@@ -1,5 +1,6 @@
 extends Control
 
+@export var root_scene_path: String = "Benchmarks/"
 @export var quit_button: Button
 
 func _enter_tree():
@@ -16,7 +17,7 @@ func _ready():
 
 func button_pressed(button: Button):
 	var scene_path = button.name.replace("_", "/") + ".tscn"
-	get_tree().change_scene_to_file(scene_path)
+	get_tree().change_scene_to_file(root_scene_path + scene_path)
 
 func foreach_button(callable: Callable, parent: Node = self):
 	for child in parent.get_children():
