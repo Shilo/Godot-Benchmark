@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://tsa7uoj0paal"]
+[gd_scene load_steps=2 format=3 uid="uid://tsa7uoj0paal"]
 
 [ext_resource type="Script" path="res://Benchmarks/BaseBenchmark/BaseBenchmark.gd" id="1_6rll0"]
-[ext_resource type="FontFile" uid="uid://wylpcuvq4h0r" path="res://Assets/RobotoMono-Regular.ttf" id="2_2bjjl"]
 
 [node name="Benchmark" type="Node2D"]
 process_mode = 3
+
+[node name="Benchmark" type="Node2D" parent="."]
+unique_name_in_owner = true
+top_level = true
 script = ExtResource("1_6rll0")
-font = ExtResource("2_2bjjl")
