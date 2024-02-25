@@ -58,14 +58,15 @@ func new_body() -> RID:
 	var size := sprite_texture.get_size()
 	
 	var body = PhysicsServer2D.body_create()
+	
 	var body_shape = PhysicsServer2D.rectangle_shape_create()
 	PhysicsServer2D.shape_set_data(body_shape, size/2)
 	
-	PhysicsServer2D.body_set_space(body, get_world_2d().space)
 	PhysicsServer2D.body_add_shape(body, body_shape)
+	PhysicsServer2D.body_set_space(body, get_world_2d().space)
 	var sprite = RenderingServer.canvas_item_create()
 	
-	RenderingServer.canvas_item_add_texture_rect(sprite, Rect2(0, 0, size.x, size.y), sprite_texture)
+	RenderingServer.canvas_item_add_texture_rect(sprite, Rect2(-size/2, size), sprite_texture)
 	RenderingServer.canvas_item_set_parent(sprite, get_canvas_item())
 	
 	body_sprites[body] = sprite
@@ -80,5 +81,6 @@ func _physics_process(_delta):
 func _exit_tree():
 	for body in body_sprites:
 		var sprite = body_sprites[body]
+		PhysicsServer2D.free_rid(PhysicsServer2D.body_get_shape(body, 0))
 		PhysicsServer2D.free_rid(body)
 		RenderingServer.free_rid(sprite)
