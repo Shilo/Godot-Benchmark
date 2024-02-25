@@ -26,4 +26,9 @@ public partial class SpritesServer2D : Node2D
         
         RenderingServer.CanvasItemAddTextureRect(_context, new Rect2(texturePosition, size), _spriteTexture.GetRid());
     }
+
+    public override void _ExitTree()
+    {
+        RenderingServer.FreeRid(_context);
+    }
 }

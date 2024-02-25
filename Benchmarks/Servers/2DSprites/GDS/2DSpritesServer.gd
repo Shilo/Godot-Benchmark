@@ -19,3 +19,6 @@ func spawn():
 	texture_position.y = randf_range(0, viewport_size.y - size.y)
 	
 	RenderingServer.canvas_item_add_texture_rect(context, Rect2(texture_position, size), sprite_texture)
+
+func _exit_tree():
+	RenderingServer.free_rid(context)

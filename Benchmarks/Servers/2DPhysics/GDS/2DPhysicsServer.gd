@@ -76,3 +76,9 @@ func _physics_process(_delta):
 		var sprite = body_sprites[body]
 		var body_transform = PhysicsServer2D.body_get_state(body, PhysicsServer2D.BODY_STATE_TRANSFORM)
 		RenderingServer.canvas_item_set_transform(sprite, body_transform)
+
+func _exit_tree():
+	for body in body_sprites:
+		var sprite = body_sprites[body]
+		PhysicsServer2D.free_rid(body)
+		RenderingServer.free_rid(sprite)
