@@ -52,7 +52,7 @@ func _process(delta: float):
 	
 	if fps < fps_target:
 		attempts += 1
-		if attempts >= fps:
+		if attempts >= fps * 2: # approximately 2 seconds
 			finish(fps, drawn_objs, draw_calls)
 			return
 	
