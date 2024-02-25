@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://dbmfbxdi51f6l"]
+
+[ext_resource type="PackedScene" uid="uid://tsa7uoj0paal" path="res://Benchmarks/BaseBenchmark/BaseBenchmark.tscn" id="1_envt5"]
+[ext_resource type="Script" path="res://Benchmarks/Servers/2DPhysics/C#/PhysicsServer2D.cs" id="2_w668x"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_idhbp"]
+size = Vector2(500, 500)
+
+[node name="2D Physics - Servers - C#" instance=ExtResource("1_envt5")]
+script = ExtResource("2_w668x")
+
+[node name="Benchmark" parent="CanvasLayer" index="0"]
+spawn_frame_interval = 3
+
+[node name="Camera2D" type="Camera2D" parent="." index="1"]
+unique_name_in_owner = true
+zoom = Vector2(0.063, 0.063)
+
+[node name="GroundBody" type="StaticBody2D" parent="." index="2"]
+
+[node name="Ground" type="CollisionShape2D" parent="GroundBody" index="0"]
+unique_name_in_owner = true
+shape = SubResource("RectangleShape2D_idhbp")
