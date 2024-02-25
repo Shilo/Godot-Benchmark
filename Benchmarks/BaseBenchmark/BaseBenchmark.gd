@@ -20,7 +20,7 @@ var debug_position: Vector2 = Vector2(16, 16 + font_size)
 var duration: float
 var frames: int
 
-@onready var scene_name := get_parent().name
+@onready var scene_name := get_parent().get_parent().name
 
 func _ready():
 	if !font: font = ThemeDB.fallback_font

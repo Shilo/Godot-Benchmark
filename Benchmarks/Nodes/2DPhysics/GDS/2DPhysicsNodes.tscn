@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://braosujw2q50a"]
+
+[ext_resource type="PackedScene" uid="uid://tsa7uoj0paal" path="res://Benchmarks/BaseBenchmark/BaseBenchmark.tscn" id="1_fvrb8"]
+[ext_resource type="Script" path="res://Benchmarks/Nodes/2DPhysics/GDS/2DPhysicsNodes.gd" id="2_5h3rn"]
+
+[node name="2D Physics - Nodes - GDS" instance=ExtResource("1_fvrb8")]
+script = ExtResource("2_5h3rn")
+
+[node name="Benchmark" parent="." index="0"]
+spawn_frame_interval = 60
+spawn_amount = 1
+
+[node name="Camera2D" type="Camera2D" parent="." index="1"]
+zoom = Vector2(0.5, 0.5)

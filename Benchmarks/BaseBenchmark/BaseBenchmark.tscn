@@ -6,7 +6,9 @@
 [node name="Benchmark" type="Node2D"]
 process_mode = 3
 
-[node name="Benchmark" type="Node2D" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Benchmark" type="Node2D" parent="CanvasLayer"]
 unique_name_in_owner = true
 top_level = true
 script = ExtResource("1_6rll0")
