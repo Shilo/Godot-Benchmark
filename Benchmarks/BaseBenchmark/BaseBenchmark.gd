@@ -1,4 +1,4 @@
-extends Node2D
+class_name BaseBenchmark extends Node2D
 
 var ignore_chars_drawn: int = 18 - 1 # minus one for background
 
@@ -47,7 +47,7 @@ func _process(delta: float):
 		draw_calls
 	]
 	
-	RenderingServer.canvas_item_add_rect(context, Rect2(0, 0, 300, 180), Color(0, 0, 0, 0.5))
+	RenderingServer.canvas_item_add_rect(context, Rect2(0, 0, 350, 180), Color(0, 0, 0, 0.5))
 	font.draw_multiline_string(context, debug_position, text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size)
 	
 	if fps < fps_target:

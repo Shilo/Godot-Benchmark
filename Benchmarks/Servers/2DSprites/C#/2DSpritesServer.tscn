@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://8tqhwga3i3yo"]
+
+[ext_resource type="PackedScene" uid="uid://tsa7uoj0paal" path="res://Benchmarks/BaseBenchmark/BaseBenchmark.tscn" id="1_1ay77"]
+[ext_resource type="Script" path="res://Benchmarks/Servers/2DSprites/C#/SpritesServer2D.cs" id="2_iavc5"]
+
+[node name="2D Sprites - RenderingServer - C#" instance=ExtResource("1_1ay77")]
+script = ExtResource("2_iavc5")

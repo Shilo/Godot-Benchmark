@@ -3,5 +3,5 @@
 [ext_resource type="PackedScene" uid="uid://tsa7uoj0paal" path="res://Benchmarks/BaseBenchmark/BaseBenchmark.tscn" id="1_svmjh"]
 [ext_resource type="Script" path="res://Benchmarks/Nodes/2DSprites/GDS/2DSpritesNodes.gd" id="2_uvdof"]
 
-[node name="2D Sprites - Nodes" instance=ExtResource("1_svmjh")]
+[node name="2D Sprites - Nodes - GDS" instance=ExtResource("1_svmjh")]
 script = ExtResource("2_uvdof")
