@@ -1,8 +1,11 @@
 extends Node2D
 
-var BODY: PackedScene = load("res://Assets/IconBody.tscn")
+var sprite_texture: Texture2D = load("res://icon.svg")
+
 var camera: Camera2D
 var camera_bounds: Rect2
+
+var body_sprites: Dictionary
 
 func _ready():
 	camera = get_node("%Camera2D")
@@ -35,14 +38,41 @@ func _ready():
 	get_node("%Benchmark").spawn.connect(spawn)
 
 func spawn():
-	var body = BODY.instantiate()
+	var size: Vector2 = sprite_texture.get_size()
+	var body = new_body()
 	
-	var half_size: Vector2 = body.get_node("Sprite").texture.get_size() / 2
-	body.position.x = randf_range(camera_bounds.position.x + half_size.y, camera_bounds.position.x + camera_bounds.size.x - half_size.x)
-	body.position.y = camera_bounds.position.y - half_size.y
-	add_child(body)
+	var body_position: Vector2 = Vector2.ZERO
+	body_position.x = randf_range(camera_bounds.position.x, camera_bounds.position.x + camera_bounds.size.x - size.x)
+	body_position.y = camera_bounds.position.y - size.y
+	
+	var body_transform = Transform2D(0, body_position)
+	PhysicsServer2D.body_set_state(body, PhysicsServer2D.BODY_STATE_TRANSFORM, body_transform)
+	RenderingServer.canvas_item_set_transform(body_sprites[body], body_transform)
 
 func get_camera_bounds() -> Rect2:
 	var size = get_viewport_rect().size / camera.zoom
 	var camera_position = camera.global_position - size / 2
 	return Rect2(camera_position, size)
+
+func new_body() -> RID:
+	var size := sprite_texture.get_size()
+	
+	var body = PhysicsServer2D.body_create()
+	var body_shape = PhysicsServer2D.rectangle_shape_create()
+	PhysicsServer2D.shape_set_data(body_shape, size/2)
+	
+	PhysicsServer2D.body_set_space(body, get_world_2d().space)
+	PhysicsServer2D.body_add_shape(body, body_shape)
+	var sprite = RenderingServer.canvas_item_create()
+	
+	RenderingServer.canvas_item_add_texture_rect(sprite, Rect2(0, 0, size.x, size.y), sprite_texture)
+	RenderingServer.canvas_item_set_parent(sprite, get_canvas_item())
+	
+	body_sprites[body] = sprite
+	return body
+
+func _physics_process(_delta):
+	for body in body_sprites:
+		var sprite = body_sprites[body]
+		var body_transform = PhysicsServer2D.body_get_state(body, PhysicsServer2D.BODY_STATE_TRANSFORM)
+		RenderingServer.canvas_item_set_transform(sprite, body_transform)
