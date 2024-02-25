@@ -1,6 +1,6 @@
 extends Node2D
 
-var BODY: PackedScene = load("res://Benchmarks/Nodes/2DPhysics/GDS/IconBody.tscn")
+var BODY: PackedScene = load("res://Assets/IconBody.tscn")
 var camera: Camera2D
 var camera_bounds: Rect2
 

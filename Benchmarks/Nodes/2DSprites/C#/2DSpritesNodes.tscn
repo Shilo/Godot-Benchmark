@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bmxetsehchq0b"]
 
 [ext_resource type="PackedScene" uid="uid://tsa7uoj0paal" path="res://Benchmarks/BaseBenchmark/BaseBenchmark.tscn" id="1_25y0a"]
-[ext_resource type="Script" path="res://Benchmarks/Nodes/2DSprites/C#/SpritesNodes2D.cs" id="2_ujvrd"]
+[ext_resource type="Script" path="res://Benchmarks/Nodes/2DSprites/C#/SpritesNodes2D.cs" id="2_ioo0s"]
 
 [node name="2D Sprites - Nodes - C#" instance=ExtResource("1_25y0a")]
-script = ExtResource("2_ujvrd")
+script = ExtResource("2_ioo0s")
