@@ -12,4 +12,6 @@ process_mode = 3
 unique_name_in_owner = true
 top_level = true
 script = ExtResource("1_6rll0")
+spawn_frame_interval = 60
+spawn_amount = 1
 font = ExtResource("2_25vjd")

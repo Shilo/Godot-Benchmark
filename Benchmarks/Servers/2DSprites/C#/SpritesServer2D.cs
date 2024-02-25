@@ -25,6 +25,5 @@ public partial class SpritesServer2D : Node2D
         texturePosition.Y = (float)GD.RandRange(0, viewportSize.Y - size.Y);
         
         RenderingServer.CanvasItemAddTextureRect(_context, new Rect2(texturePosition, size), _spriteTexture.GetRid());
-
     }
 }
