@@ -3,9 +3,9 @@ extends Node2D
 var ignore_chars_drawn: int = 18 - 1 # minus one for background
 
 @export_category("Benchmark")
-@export var spawn_interval: float = 1/30.0
-@export var spawn_amount: int = 100
-@export var fps_target: int = 30
+@export var spawn_frame_interval: int = 1
+@export var spawn_amount: int = 10
+@export var fps_target: int = 60
 
 @export_category("Interface")
 @export var font_size: int = 16
@@ -16,9 +16,9 @@ signal spawn
 var context: RID
 var last_chars_drawn: int
 var attempts: int
-var time: float
 var debug_position: Vector2 = Vector2(16, 16 + font_size)
 var duration: float
+var frames: int
 
 @onready var scene_name := get_parent().name
 
@@ -32,7 +32,9 @@ func _ready():
 func _process(delta: float):
 	RenderingServer.canvas_item_clear(context)
 	
+	frames += 1
 	duration += delta
+	
 	var fps: int = round(Engine.get_frames_per_second())
 	var drawn_objs: int = (Performance.get_monitor(Performance.RENDER_TOTAL_OBJECTS_IN_FRAME) as int) - last_chars_drawn
 	var draw_calls: int = (Performance.get_monitor(Performance.RENDER_TOTAL_DRAW_CALLS_IN_FRAME) as int) - last_chars_drawn
@@ -54,9 +56,8 @@ func _process(delta: float):
 			finish(fps, drawn_objs, draw_calls)
 			return
 	
-	time += delta
-	if time >= spawn_interval:
-		time -= spawn_interval
+	if frames >= spawn_frame_interval:
+		frames = 0
 		
 		for i in spawn_amount:
 			spawn.emit()
