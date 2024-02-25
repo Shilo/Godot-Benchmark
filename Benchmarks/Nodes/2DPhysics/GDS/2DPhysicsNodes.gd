@@ -20,8 +20,8 @@ func _ready():
 		var offset = (camera_bounds.size.x + ground.shape.size.x) / 2
 		if x == 0: offset = -offset
 		wall.position.x += offset
-		wall.position.y -= 300
-		wall.shape.size.y = camera_bounds.size.y + 600	
+		wall.position.y -= camera_bounds.size.y / 2
+		wall.shape.size.y = camera_bounds.size.y + camera_bounds.size.y
 		
 		var wall_body = StaticBody2D.new()
 		wall_body.add_child(wall)
@@ -30,6 +30,7 @@ func _ready():
 	ground.position = camera.position
 	ground.position.y += (camera_bounds.size.y + ground.shape.size.y) / 2
 	ground.shape.size.x = camera_bounds.size.x * 2
+	ground.shape = ground.shape.duplicate() # fix bug with Rapier 2D Physics engine
 	
 	get_node("%Benchmark").spawn.connect(spawn)
 
