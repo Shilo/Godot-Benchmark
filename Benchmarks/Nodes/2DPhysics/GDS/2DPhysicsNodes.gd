@@ -21,7 +21,7 @@ func _ready():
 		if x == 0: offset = -offset
 		wall.position.x += offset
 		wall.position.y -= 300
-		wall.shape.size.y = camera_bounds.size.y + 600
+		wall.shape.size.y = camera_bounds.size.y + 600	
 		
 		var wall_body = StaticBody2D.new()
 		wall_body.add_child(wall)

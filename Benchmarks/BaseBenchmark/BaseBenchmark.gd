@@ -65,7 +65,7 @@ func _process(delta: float):
 	last_chars_drawn = text.length() - ignore_chars_drawn
 
 func _input(event: InputEvent):
-	if ((event is not InputEventMouseButton || !event.is_pressed())
+	if ((!(event is InputEventMouseButton) || !event.is_pressed())
 		&& !event.is_action_pressed("ui_cancel")): return
 	
 	get_tree().change_scene_to_file("res://Main/Main.tscn")
