@@ -36,7 +36,6 @@ func _ready():
 func spawn():
 	var body = BODY.instantiate()
 	
-	var viewport_size: Vector2 = get_viewport_rect().size
 	var half_size: Vector2 = body.get_node("Sprite").texture.get_size() / 2
 	body.position.x = randf_range(camera_bounds.position.x + half_size.y, camera_bounds.position.x + camera_bounds.size.x - half_size.x)
 	body.position.y = camera_bounds.position.y - half_size.y
@@ -44,5 +43,5 @@ func spawn():
 
 func get_camera_bounds() -> Rect2:
 	var size = get_viewport_rect().size / camera.zoom
-	var position = camera.global_position - size / 2
-	return Rect2(position, size)
+	var camera_position = camera.global_position - size / 2
+	return Rect2(camera_position, size)
